@@ -17,8 +17,8 @@
 
                                 <div class="card" style="margin-bottom: 30px">
                                     <a href="{{ route('property.show', $property->id) }}">
-                                    <img class="card-img-top" src="{{ asset('storage'.$property->image_name) }}"
-                                         alt="Property image">
+                                        <img class="card-img-top" src="{{ asset('storage'.$property->image_name) }}"
+                                             alt="Property image">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="card-title">Name: {{ $property->name }}</h5>

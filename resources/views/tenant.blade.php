@@ -9,7 +9,7 @@
                         <p>Create Tenant</p>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('tenant.store', 1) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('tenant.store') }}" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label for="image">Property image</label>
@@ -42,7 +42,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

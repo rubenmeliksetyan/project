@@ -27,31 +27,23 @@ class TenantsController extends Controller
         return view('tenant');
     }
 
-    public function store(TenantRequest $request, $id)
+    public function store(TenantRequest $request)
     {
+        $tenant = new Tenant();
+
+        $tenant->name = $request->name;
+        $tenant->address = $request->address;
+
         if ($request->has('image')) {
             $image = $request->file('image');
             $name = str_slug($request->input('name')) . '_' . time();
             $folder = '/uploads/images/';
             $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             $this->uploadOne($image, $folder, 'public', $name);
-//            $tenant->image_name = $filePath;
+            $tenant->image_name = $filePath;
         }
-        $tanancy = Tenancy::findOrFail($id);
-        $tanancy->tenant()->create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'image_name' => $filePath
-        ]);
 
-//        $tenant = new Tenant();
-//
-//        $tenant->name = $request->name;
-//        $tenant->address = $request->address;
-//
-//
-//
-//        $tenant->save();
+        $tenant->save();
 
         return redirect()->back();
 
@@ -65,5 +57,10 @@ class TenantsController extends Controller
 
     }
 
+    // todo: make this functionality
+    public function tenant_to_tenancy(Tenancy $tenancy, $id)
+    {
 
+
+    }
 }

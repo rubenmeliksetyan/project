@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    //
     protected $fillable = [
         'name', 'address', 'image_name', 'property_value', 'mortgage', 'user_id'
     ];
@@ -21,6 +20,5 @@ class Property extends Model
     {
         return $this->HasOne(Tenancy::class);
     }
-
 
 }
