@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <p>Properties</p>
+                        <p>Property</p>
                     </div>
                     @csrf
                     <div class="card-body">
@@ -27,19 +27,26 @@
                         @if(isset($property->tenancy))
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <input type="date" class="form-control" name="start_date"
+                                <input readonly type="date" class="form-control" name="start_date"
                                        value="{{ $property->tenancy->start_date }}">
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <input type="date" class="form-control" name="end_date"
+                                <input readonly type="date" class="form-control" name="end_date"
                                        value="{{ $property->tenancy->end_date }}">
                             </div>
                             <div class="form-group">
                                 <label for="monthly_rent">Monthly Rent</label>
-                                <input type="number" class="form-control" min="0" step="0.1"
+                                <input readonly type="number" class="form-control" min="0" step="0.1"
                                        name="monthly_rent" value="{{ $property->tenancy->monthly_rent }}">
                             </div>
+                            @if(isset($property->tenancy->tenant))
+                                <h1>Property Tenant</h1>
+                                <p>{{ $property->tenancy->tenant->name }}</p>
+                                <p>{{ $property->tenancy->tenant->address }}</p>
+                                <img class="card-img-top" src="{{ asset('storage'.$property->tenancy->tenant->image_name) }}"
+                                     alt="Property image">
+                            @endif
                         @else
                             <form action="{{ route('property.tenancy', $property->id) }}">
                                 <div class="form-group">
@@ -56,23 +63,16 @@
                                            name="monthly_rent">
                                 </div>
                                 @csrf
-
+                                <select name="tenant_id" id="">
+                                    @foreach($tenant as $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    @endforeach
+                                </select>
                                 <button type="submit" class="btn btn-primary">Assign To Property</button>
                                 <hr>
 
                             </form>
                         @endif
-                        {{--                        @isset($property->tenancy->tenant)--}}
-                        <div class="card" style="width: 18rem; margin: 3rem;">
-                            <img class="card-img-top"
-                                 src="{{ asset('storage'.$property->tenancy->tenant->image_name) }}"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">Address: {{ $property->tenancy->tenant->address }}</p>
-                                <p class="card-text">Address: {{ $property->tenancy->tenant->name }}</p>
-                            </div>
-                        </div>
-                        {{--                        @endisset--}}
 
                     </div>
                 </div>

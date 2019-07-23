@@ -8,7 +8,7 @@ class Tenancy extends Model
 {
     //
     protected $fillable = [
-        'user_id', 'property_id', 'monthly_rent', 'start_date', 'end_date'
+        'user_id', 'property_id', 'monthly_rent', 'start_date', 'end_date', 'tenant_id'
 
     ];
 

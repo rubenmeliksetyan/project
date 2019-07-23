@@ -20,6 +20,7 @@ class CreateTenanciesTable extends Migration
             $table->decimal('monthly_rent')->nullable();
             $table->date('start_date');
             $table->date('end_date');
+            $table->bigInteger('tenant_id')->unsigned()->nullable();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -27,7 +28,6 @@ class CreateTenanciesTable extends Migration
             $table->foreign('property_id')
                 ->references('id')
                 ->on('properties');
-            $table->bigInteger('tenant_id')->unsigned()->nullable();
             $table->foreign('tenant_id')
                 ->references('id')
                 ->on('tenants');

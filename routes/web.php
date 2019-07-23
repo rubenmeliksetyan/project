@@ -24,7 +24,7 @@ Route::get('/property', 'PropertyController@index')->name('property');
 Route::get('/property/tenancy/{property}', 'PropertyController@tenancy_to_property')->name('property.tenancy');
 Route::get('/property/{property}', 'PropertyController@show')->name('property.show');
 
-
 Route::get('/tenant', 'TenantsController@index')->name('tenants');
 Route::get('/tenant/create', 'TenantsController@create')->name('tenant.create');
-Route::post('/tenant/store/{id}', 'TenantsController@store')->name('tenant.store');
+Route::post('/tenant/store', 'TenantsController@store')->name('tenant.store');
+

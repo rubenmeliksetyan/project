@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Property;
+use App\Tenant;
 use App\Traits\UploadTrait;
 use App\Http\Requests\PropertyRequest;
 use Illuminate\Support\Facades\Request;
@@ -46,15 +47,17 @@ class PropertyController extends Controller
     public function show($id)
     {
         $property = Property::findOrFail($id);
-        dd($property->tenancy->tenant);
+        $tenant = Tenant::all();
 
-        return view('property.property', compact('property'));
+        return view('property.property', compact('property', 'tenant'));
 
     }
 
     public function tenancy_to_property(Property $property)
     {
         $property->tenancy()->create([
+//            dd(\request('tenant_id')),
+            'tenant_id' => \request('tenant_id'),
             'monthly_rent' => \request('monthly_rent'),
             'start_date' => \request('start_date'),
             'end_date' => \request('end_date'),
