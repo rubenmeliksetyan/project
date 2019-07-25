@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TenancyRequest;
 use App\Property;
 use App\Tenant;
 use App\Traits\UploadTrait;
@@ -44,25 +45,32 @@ class PropertyController extends Controller
         return redirect()->back();
     }
 
-    public function show($id)
+    public function show(Property $property)
     {
-        $property = Property::findOrFail($id);
-        $tenant = Tenant::all();
-
+        $tenant = Tenant::all('id', 'name');
+//        dd($tenant);
         return view('property.property', compact('property', 'tenant'));
 
     }
 
-    public function tenancy_to_property(Property $property)
+    public function tenancy_to_property(Property $property, TenancyRequest $request)
     {
-        $property->tenancy()->create([
-//            dd(\request('tenant_id')),
-            'tenant_id' => \request('tenant_id'),
-            'monthly_rent' => \request('monthly_rent'),
-            'start_date' => \request('start_date'),
-            'end_date' => \request('end_date'),
-            'user_id' => auth()->id()
-        ]);
+
+//        $property->tenancy->tenant_id = $request->tenant_id;
+//        $property->tenancy->monthly_rent = $request->monthly_rent;
+//        $property->tenancy->start_date = $request->start_date;
+//        $property->tenancy->end_date = $request->end_date;
+//        $property->tenancy->user_id = auth()->id();
+
+        foreach ($request->tenant_id as $item)
+
+            $array = [
+                'start_date' => $request->start_date,
+                'monthly_rent' => $request->monthly_rent,
+                'end_date' => $request->end_date,
+                'user_id' => auth()->id(),
+            ];
+        $property->tenancy()->sync([$item => $array]);
 
         return redirect()->back();
 
