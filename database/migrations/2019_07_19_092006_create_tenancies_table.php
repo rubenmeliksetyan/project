@@ -18,8 +18,8 @@ class CreateTenanciesTable extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('property_id')->unsigned()->nullable();
             $table->decimal('monthly_rent')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->bigInteger('tenant_id')->unsigned()->nullable();
 
             $table->foreign('user_id')

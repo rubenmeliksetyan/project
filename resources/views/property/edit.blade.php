@@ -12,7 +12,7 @@
                     <div class="card-body">
 
 
-                        <form method="POST" action="{{ route('property.edit') }}" enctype="multipart/form-data">
+                        <form method="POST" action="" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label for="image">Property image</label>

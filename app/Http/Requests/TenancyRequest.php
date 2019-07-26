@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 
 class TenancyRequest extends FormRequest
 {
@@ -23,12 +24,31 @@ class TenancyRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-//
-            'monthly_rent' => 'required|numeric',
-            'start_date'   => 'required|date',
-            'end_date'     => 'required|date',
-            'tenant_id'    => 'array'
-        ];
+        switch (Request::method()){
+            case 'post':
+                return [
+                    'monthly_rent' => 'required|numeric',
+                    'start_date'   => 'required|date',
+                    'end_date'     => 'required|date',
+                    'tenant_id'    => 'array'
+                ];
+                break;
+            case 'put':
+                return [
+                    'monthly_rent' => 'numeric',
+                    'start_date'   => 'date',
+                    'end_date'     => 'date',
+                    'tenant_id'    => ''
+                ];
+                break;
+            default:
+                return [
+                    'monthly_rent' => 'required|numeric',
+                    'start_date'   => 'required|date',
+                    'end_date'     => 'required|date',
+                    'tenant_id'    => 'array'
+                ];
+        }
+
     }
 }

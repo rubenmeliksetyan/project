@@ -8,7 +8,6 @@
                     <div class="card-header">
                         <p>Property</p>
                     </div>
-                    @csrf
                     <div class="card-body">
                         <div class="card" style="margin-bottom: 30px">
                             <img class="card-img-top" src="{{ asset('storage'.$property->image_name) }}"
@@ -48,14 +47,16 @@
                                      alt="Property image">
                             @endif
                         @else
-                            <form action="{{ route('property.tenancy', $property->id) }}">
+                            <form method="post" action="{{ route('tenancy.store', $property->id) }}">
+
                                 <div class="form-group">
                                     <label for="start_date">Start Date</label>
                                     <input type="date" class="form-control  @error('start_date') is-invalid @enderror" name="start_date">
                                 </div>
                                 @error('start_date')
                                 <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror                                <div class="form-group">
+                                @enderror
+                                <div class="form-group">
                                     <label for="end_date">End Date</label>
                                     <input type="date" class="form-control  @error('end_date') is-invalid @enderror" name="end_date">
                                 </div>
@@ -71,7 +72,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 @csrf
-                                <select class="js-example-basic-multiple large @error('tenant_id') is-invalid @enderror" name="tenant_id[]" multiple="multiple">
+                                <select class="js-example-basic-multiple large @error('tenant_id') is-invalid @enderror" name="tenant_ids[]" multiple="multiple">
                                     @foreach($tenant as $value)
                                         <option value="{{ $value->id }}">{{ $value->name }}</option>
                                     @endforeach
