@@ -11,9 +11,13 @@ class Tenant extends Model
         'image_name', 'name', 'address'
     ];
 
+    public function tenancy()
+    {
+        return $this->belongsToMany(Tenancy::class, 'tenancy_tenants');
+    }
     public function property()
     {
-        return $this->belongsToMany(Property::class, 'tenancies')->withPivot('start_date', 'end_date', 'monthly_rent');
+        return $this->belongsTo(Property::class);
     }
 
 }

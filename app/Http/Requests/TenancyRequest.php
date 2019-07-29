@@ -30,15 +30,15 @@ class TenancyRequest extends FormRequest
                     'monthly_rent' => 'required|numeric',
                     'start_date'   => 'required|date',
                     'end_date'     => 'required|date',
-                    'tenant_id'    => 'array'
+                    'tenant_ids'     => 'array',
                 ];
                 break;
             case 'put':
                 return [
-                    'monthly_rent' => 'numeric',
-                    'start_date'   => 'date',
-                    'end_date'     => 'date',
-                    'tenant_id'    => ''
+                    'monthly_rent' => 'required|numeric',
+                    'start_date'   => 'required|date',
+                    'end_date'     => 'required|date',
+                    'tenant_ids'     => 'array'
                 ];
                 break;
             default:
@@ -46,7 +46,7 @@ class TenancyRequest extends FormRequest
                     'monthly_rent' => 'required|numeric',
                     'start_date'   => 'required|date',
                     'end_date'     => 'required|date',
-                    'tenant_id'    => 'array'
+                    'tenant_ids'     => 'array'
                 ];
         }
 

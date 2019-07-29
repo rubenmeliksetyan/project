@@ -29,8 +29,7 @@
                                     <td>{{ $tenancy->end_date }}</td>
                                     <td>{{ $tenancy->monthly_rent }} $</td>
                                     <td>{{ $tenancy->property->name }}</td>
-{{--                                    <td>{{  implode(", ",$tenancy->tenant) }}</td>--}}
-                                    <td>{{  $tenancy->tenant->name }}</td>
+                                    <td> @foreach($tenancy->tenants as $tenant) {{ $tenant->name  }}  @endforeach </td>
                                     <td><a href="{{  route('tenancy.edit', $tenancy->id) }}">Edit</a> </td>
                                 </tr>
                             @endforeach

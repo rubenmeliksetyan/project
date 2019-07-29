@@ -24,28 +24,14 @@ class PropertyRequest extends FormRequest
      */
     public function rules()
     {
-        switch (Request::method()){
-            case 'post':
-            return [
-                'name' => 'required|string|max:255',
-                'address' => 'required|string|max:255',
-                'property_value' => 'required|numeric',
-                'mortgage' => 'required|numeric',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ];
-            break;
-            case 'put':
-                return [
-                'name' => 'string|max:255',
-                'address' => 'string|max:255',
-                'property_value' => 'numeric',
-                'mortgage' => 'numeric',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ];
 
-        }
-
-
+        return [
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'property_value' => 'required|numeric',
+            'mortgage' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
 
 
     }

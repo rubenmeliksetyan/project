@@ -18,12 +18,7 @@ class Property extends Model
 
     public function tenancy()
     {
-        return $this->belongsToMany(
-            Tenant::class,
-            'tenancies',
-            'property_id',
-            'tenant_id')
-            ->withPivot('start_date', 'end_date', 'monthly_rent');
+        return $this->HasOne(Tenancy::class);
     }
 
 }

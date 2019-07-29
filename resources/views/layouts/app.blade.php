@@ -54,13 +54,19 @@
                         @endif
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ route('home') }}">{{ __('Create Property') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('property') }}">{{ __('Show Properties') }}</a>
+                            <a class="nav-link" href="{{ route('properties') }}">{{ __('Show Properties') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tenancies') }}">{{ __('Show Tenancies') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('tenant.create') }}">{{ __('Tenant Create') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tenancy.show') }}">{{ __('Create Tenancy') }}</a>
                         </li>
 
                         <li class="nav-item dropdown">
