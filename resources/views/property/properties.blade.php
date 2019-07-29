@@ -16,7 +16,7 @@
                             @foreach($properties as $property)
 
                                 <div class="card" style="margin-bottom: 30px">
-                                    <a href="{{ route('property.show', $property->id) }}">
+                                    <a href="{{ route('property.edit', $property->id) }}">
                                         <img class="card-img-top" src="{{ asset('storage'.$property->image_name) }}"
                                              alt="Property image">
                                     </a>

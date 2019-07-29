@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TenancyRequest;
 use App\Property;
 use App\Tenant;
 use App\Traits\UploadTrait;
@@ -10,9 +11,15 @@ use Illuminate\Support\Facades\Request;
 
 class PropertyController extends Controller
 {
+
     use UploadTrait;
 
     const PAGINATION = 10;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -23,48 +30,53 @@ class PropertyController extends Controller
 
     public function store(PropertyRequest $request)
     {
-        $property = new Property();
+        $filePath = null;
 
-        $property->user_id = auth()->id();
-        $property->name = $request->name;
-        $property->address = $request->address;
-        $property->property_value = $request->property_value;
-        $property->mortgage = $request->mortgage;
         if ($request->has('image')) {
             $image = $request->file('image');
             $name = str_slug($request->input('name')) . '_' . time();
             $folder = '/uploads/images/';
             $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             $this->uploadOne($image, $folder, 'public', $name);
-            $property->image_name = $filePath;
         }
 
-        $property->save();
-
-        return redirect()->back();
+        Property::create([
+            'user_id' => auth()->id(),
+            'name' => $request->name,
+            'address' => $request->address,
+            'property_value' => $request->property_value,
+            'mortgage' => $request->mortgage,
+            'image_name' => $filePath
+        ]);
+        return redirect()->route('properties');
     }
 
-    public function show($id)
+    public function edit(Property $property)
     {
-        $property = Property::findOrFail($id);
-        $tenant = Tenant::all();
-
-        return view('property.property', compact('property', 'tenant'));
-
+        return view('property.edit', compact('property'));
     }
 
-    public function tenancy_to_property(Property $property)
+    public function update(Property $property, PropertyRequest $request)
     {
-        $property->tenancy()->create([
-//            dd(\request('tenant_id')),
-            'tenant_id' => \request('tenant_id'),
-            'monthly_rent' => \request('monthly_rent'),
-            'start_date' => \request('start_date'),
-            'end_date' => \request('end_date'),
-            'user_id' => auth()->id()
+        $filePath = null;
+
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $name = str_slug($request->input('name')) . '_' . time();
+            $folder = '/uploads/images/';
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $this->uploadOne($image, $folder, 'public', $name);
+        }
+
+        $property->update([
+            'name'           => $request->name,
+            'address'        => $request->address,
+            'image_name'     => $filePath,
+            'property_value' => $request->property_value,
+            'mortgage'       => $request->mortgage,
         ]);
 
-        return redirect()->back();
+        return redirect()->route('properties');
 
     }
 

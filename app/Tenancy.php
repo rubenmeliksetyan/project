@@ -22,9 +22,9 @@ class Tenancy extends Model
         return $this->belongsTo(Property::class);
     }
 
-    public function tenant()
+    public function tenants()
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->belongsToMany(Tenant::class, 'tenancy_tenants');
     }
 
 }

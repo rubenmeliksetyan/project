@@ -6,6 +6,9 @@
 
 require('./bootstrap');
 
+require('../../node_modules/select2');
+require('./custom');
+
 window.Vue = require('vue');
 
 /**

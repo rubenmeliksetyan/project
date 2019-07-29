@@ -13,7 +13,11 @@ class Tenant extends Model
 
     public function tenancy()
     {
-        return $this->hasMany(Tenancy::class);
+        return $this->belongsToMany(Tenancy::class, 'tenancy_tenants');
+    }
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
     }
 
 }

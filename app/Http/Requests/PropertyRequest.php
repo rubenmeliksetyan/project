@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 
 class PropertyRequest extends FormRequest
 {
@@ -23,14 +24,15 @@ class PropertyRequest extends FormRequest
      */
     public function rules()
     {
-        return [
 
+        return [
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'property_value' => 'required|numeric',
             'mortgage' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
         ];
+
+
     }
 }
