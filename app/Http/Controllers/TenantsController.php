@@ -13,6 +13,10 @@ class TenantsController extends Controller
     //
     use UploadTrait;
     const PAGINATION = 10;
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -57,10 +61,4 @@ class TenantsController extends Controller
 
     }
 
-    // todo: make this functionality
-    public function tenant_to_tenancy(Tenancy $tenancy, $id)
-    {
-
-
-    }
 }

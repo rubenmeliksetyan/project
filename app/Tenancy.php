@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tenancy extends Model
 {
+    use Filterable;
     //
     protected $fillable = [
         'user_id', 'property_id', 'monthly_rent', 'start_date', 'end_date', 'tenant_id'

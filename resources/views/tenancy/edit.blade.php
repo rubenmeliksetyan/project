@@ -56,13 +56,14 @@
                                         @enderror
                                     </li>
                                     <li class="list-group-item">
-                                        <label for="tenant_id">Tenants Name</label>
-                                        <select class="js-example-basic-multiple large @error('tenant_id') is-invalid @enderror" name="tenant_ids[]" multiple="multiple">
-                                            @foreach($tenancy->tenants as $tenant)
-                                                <option value="{{ $tenant->id }}" selected> {{ $tenant->name }}</option>
+                                        <select class="js-example-basic-multiple large @error('tenant_id') is-invalid @enderror"
+                                                name="tenant_ids[]" id="editSelect" multiple="multiple">
+
+                                            @foreach($tenancy->tenants as  $tenant)
+                                                <option value="{{ $tenant->id }}" selected>{{ $tenant->name }}</option>
                                             @endforeach
                                             @foreach($tenants as $k => $tenant)
-                                                <option value="{{ $k }}" >{{ $tenant }}</option>
+                                                <option value="{{ $k }}">{{ $tenant }}</option>
                                             @endforeach
                                         </select>
 

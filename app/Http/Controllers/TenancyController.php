@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TenancyRequest;
 use App\Property;
 use App\Tenancy;
+use App\TenancyFilters;
 use App\Tenant;
-use Illuminate\Http\Request;
 
 class TenancyController extends Controller
 {
@@ -17,9 +17,9 @@ class TenancyController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(TenancyFilters $filters)
     {
-        $tenancies = Tenancy::with(['property', 'tenants'])->paginate(self::PAGINATION);
+        $tenancies = Tenancy::filter($filters)->with(['property', 'tenants'])->paginate(self::PAGINATION);
 
         return view('tenancy.index', compact('tenancies'));
 
