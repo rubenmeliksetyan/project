@@ -1,0 +1,10 @@
+.filters > input {
+  width: 240px;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}

@@ -9,8 +9,36 @@
 
                     </div>
                     <div class="card-body">
+                        <div>
+                            <form action="{{ route('tenancies') }}" method="get">
+                                <div class="filters">
+                                    <div>
+                                        <label for="startDate">Start Date</label>
+                                        <input type="hidden" name="date">
+                                        <input type="date" class="form-control" name="startDate">
+                                    </div>
+                                    <div>
+                                        <label for="endDate">End Date</label>
+                                        <input type="date" class="form-control" name="endDate">
+                                    </div>
+                                    <div>
+                                        <label for="search">Search</label>
+                                        <div class="input-group">
+                                            <input type="text" name="search" class="form-control" placeholder="Search Tenant">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
                         <table class="table">
                             <thead>
+
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Start Date</th>
@@ -30,7 +58,7 @@
                                     <td>{{ $tenancy->monthly_rent }} $</td>
                                     <td>{{ $tenancy->property->name }}</td>
                                     <td> @foreach($tenancy->tenants as $tenant) {{ $tenant->name  }}  @endforeach </td>
-                                    <td><a href="{{  route('tenancy.edit', $tenancy->id) }}">Edit</a> </td>
+                                    <td><a href="{{  route('tenancy.edit', $tenancy->id) }}">Edit</a></td>
                                 </tr>
                             @endforeach
 
